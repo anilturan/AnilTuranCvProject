@@ -1,0 +1,63 @@
+﻿@model IEnumerable<AnilTuran.Models.Experience>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserInformationID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PozisyonAdi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SirketAdi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Aciklama)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BaslamaTarihi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BitisTarihi)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserInformationID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PozisyonAdi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SirketAdi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Aciklama)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BaslamaTarihi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BitisTarihi)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ExperienceID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ExperienceID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ExperienceID })
+        </td>
+    </tr>
+}
+
+</table>

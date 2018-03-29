@@ -1,0 +1,361 @@
+﻿@using AnilTuran.Models
+@model UserInformation
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="themesit.com">
+    <link rel="icon" href="~/img/favicon.ico">
+
+    <title>@(Model.Ad + " " + Model.Soyad)</title>
+    <!-- ICON FONTS -->
+    <link href="~/Content/pe-icon-7-combo.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-social.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-social.css" rel="stylesheet" />
+    <!-- BOOTSTRAP CORE CSS -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <!-- PLUGIN STYLES FOR THIS TEMPLATE -->
+    <link href="~/Content/plugins.min.css" rel="stylesheet" />
+    <link href="~/Content/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/Content/lightgallery.min.css" rel="stylesheet" />
+
+    <!-- MAIN STYLE FOR THIS TEMPLATE -->
+    <link href="~/Content/main.css" rel="stylesheet" />
+    <!-- FONTS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+</head>
+<body class="layout-1 index-image">
+    <!-- PRELOADER -->
+    <div class="loader-wrapper">
+        <div class="loader"></div>
+    </div>
+    <!-- /END PRELOADER -->
+    <!-- INTRO -->
+    <div class="intro">
+        <div class="intro-inner intro-inner-left">
+            <!-- BACKGROUND IMAGE -->
+            <div class="main-bg bg-image overlay" data-image="/img/pexels-photo.jpeg"></div>
+        </div>
+
+        <div class="intro-inner intro-inner-right">
+            <p align="right">
+                <a href="@Url.Action("Login","Account")" class="dropdown-toggle">
+                    <i class="glyphicon glyphicon-user"> Admin Girişi    </i>
+                </a>
+            </p>
+            <div class="intro-content">
+                <!-- YOUR AVATAR -->
+                <img src="~/img/avatar.jpg" class="avatar" alt="avatar">
+
+                <!-- YOUR DESCRIPTION -->
+                <h1>@(Model.Ad + " " + Model.Soyad)</h1>
+                <p class="desc"><span class="typed">Web Designer</span></p>
+                <!-- TYPED STRINGS -->
+                <div class="typed-strings">
+                    @foreach (var item in Model.Unvanlar)
+                    {
+                        <p>@item.UnvanAdi</p>
+                    }
+                </div>
+                <p>
+                    <button class="btn btn-glossy inverse goto-right"><span>Hakkımda</span></button>
+                </p>
+               
+            </div>
+        </div>
+    </div>
+    <!-- /END INTRO -->
+    <!-- MAIN -->
+    <div class="main main-right">
+        <div class="container-fluid">
+            <!-- ABOUT -->
+            <div id="about" class="section-block">
+                <h3 class="title">Hakkımda</h3>
+                <p>@Model.Hakkimda</p>
+                @*<p> @Html.ActionLink("indir", "File", "Cvs")  </p>*@
+                <p>
+                    <a download href="~/File/CV/AnilTuran_CV (2).pdf"><span class="glyphicon glyphicon-download"></span><strong>  Download My CV   </strong></a>
+                    <a href="@Model.Link1" target="_blank"> <strong> GitHub  </strong></a>
+                    <a href="@Model.Link2" target="_blank"><span class="btn-linkedin"></span> <strong>Linkedin</strong></a>
+
+                </p>
+            </div>
+          
+            <!-- /END ABOUT -->
+            <!-- EDUCATION -->
+            <div id="education" class="section-block">
+                <h3 class="title">Eğitim Bilgileri</h3>
+                <p></p>
+                <div class="timeline edu-timeline">
+                    @foreach (var item in Model.Egitimler)
+            {
+
+                var dateBit = "";
+                if (item.BitisTarihi != null)
+                {
+                    dateBit = item.BitisTarihi.Value.ToShortDateString();
+                }
+                <div class="timeline-item">
+                    <div class="col-sm-3">
+                        <span class="time"><b>@(item.BaşlamaTarihi.ToShortDateString() + "-" + dateBit)</b></span>
+                    </div>
+                    <div class="col-sm-5">
+                        <span class="institute">@item.OkulAdi</span>
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="degree">@(item.BolumAdi + " / " + item.EgitimSeviyesi)</span>
+                    </div>
+                    <p> <span class="institute">@item.Aciklama</span></p>
+                </div>
+
+
+    }
+                </div>
+            </div>
+            <!-- /END EDUCATION -->
+            <!-- EXPERIENCE -->
+            <div id="education" class="section-block">
+                <h3 class="title">Eğitim Bilgileri</h3>
+                <p></p>
+                <div class="timeline edu-timeline">
+
+
+
+                    @foreach (var item in Model.Deneyimler)
+            {
+                var date = "";
+                if (item.BitisTarihi != null)
+                {
+                    date = item.BitisTarihi.Value.ToShortDateString();
+                }
+                // var date = item.BitisTarihi != null ? item.BitisTarihi.Value.ToShortDateString() ? ""
+                <div class="timeline-item">
+                    <div class="col-sm-3">
+                        <span class="time"><b>@(item.BaslamaTarihi.ToShortDateString() + " - " + date)</b></span>
+                    </div>
+                    <div class="col-sm-6">
+                        <span class="institute">@item.SirketAdi</span>
+                    </div>
+                    <div class="col-sm-3">
+                        <span class="degree">@item.PozisyonAdi</span>
+                    </div>
+                </div>
+    }
+                </div>
+            </div>
+            <!-- /END EXPERIENCE -->
+            <!-- PROJECTS -->
+            <div id="experience" class="section-block">
+                <h3 class="title">Projeler</h3>
+                <p></p>
+                <div class="timeline exp-timeline text-xs-center text-sm-left">
+                    @foreach (var item in Model.Projeler)
+            {
+                <div class="timeline-item">
+                    <div class="timeline-image">
+                        <img src="/img/experience/01.jpg" alt="">
+                    </div>
+                    <div class="timeline-content">
+                        <span class="time"></span>
+                        <h4>@item.ProjeAdi</h4>
+                        <h5><a href="@item.Link" target="_blank">Projeye gitmek için tıklayınız.. ->GitHub</a></h5>
+                        <p>@item.Aciklama</p>
+                    </div>
+                </div>
+    }
+                </div>
+            </div>
+            <!-- /END PROJECTS -->
+            <!-- SKILLS -->
+            <div id="skills" class="section-block">
+                <h3 class="title">Yetenekler</h3>
+
+                <div class="progress-bars p-t-30">
+                    @foreach (var item in Model.Yetenekler)
+            {
+                <div class="progress-info">@item.BeceriAdi</div>
+                <div class="progress">
+                    <div class="progress-bar anim" data-percent=@item.BeceriDerecesi>
+                        <span class="value">%@item.BeceriDerecesi</span>
+                    </div>
+                </div>
+    }
+                </div>
+            </div>
+            <!-- /END SKILLS -->
+            <!-- PORTFOLIO -->
+            <div id="portfolio" class="section-block">
+                <h3 class="title">Portfolio</h3>
+                <!-- WORKS FILTER -->
+                <div class="works-filter-wrap">
+                    <ul class="works-filter clearfix font2">
+                        <li><a id="all" href="#" data-filter="*" class="active"><span>All</span></a></li>
+                        <li><a href="#" data-filter=".branding"><span>Branding</span></a></li>
+                        <li><a href="#" data-filter=".graphics"><span>Graphics</span></a></li>
+                        <li><a href="#" data-filter=".logos"><span>Logos</span></a></li>
+                        <li class="hidden-xs"><a href="#" data-filter=".ui"><span>UI</span></a></li>
+                        <li class="hidden-xs"><a href="#" data-filter=".web"><span>Web</span></a></li>
+                    </ul>
+                </div>
+                <!-- /END WORKS FILTER -->
+                <div id="works-container" class="works-container clearfix">
+                    <!-- WORKS ITEM -->
+                    <div class="works-item ui web" data-src="/img/works/01_full.jpg">
+                        <img src="/img/works/01_thumb.jpg" data-no-retina alt="" />
+                        <div class="works-item-inner">
+                            <h4>Print Design</h4>
+                            <h5>Branding</h5>
+                        </div>
+                    </div>
+                    <!-- /END WORKS ITEM -->
+                    <!-- WORKS ITEM -->
+                    <div class="works-item web logos" data-src="http://www.youtube.com/watch?v=Pq9yPrLWMyU" data-poster="/img/works/02_full.jpg">
+                        <img src="/img/works/02_thumb.jpg" data-no-retina alt="" />
+                        <div class="works-item-inner">
+                            <h4>Graphic Design</h4>
+                            <h5>Branding</h5>
+                        </div>
+                    </div>
+                    <!-- /END WORKS ITEM -->
+                    <!-- WORKS ITEM -->
+                    <div class="works-item logos graphics" data-src="/img/works/03_full.jpg">
+                        <img src="/img/works/03_thumb.jpg" data-no-retina alt="" />
+                        <div class="works-item-inner">
+                            <h4>Logo Design</h4>
+                            <h5>Branding</h5>
+                        </div>
+                    </div>
+                    <!-- /END WORKS ITEM -->
+                    <!-- WORKS ITEM -->
+                    <div class="works-item branding ui" data-src="http://vimeo.com/1084537" data-poster="/img/works/04_full.jpg">
+                        <img src="/img/works/04_thumb.jpg" data-no-retina alt="" />
+                        <div class="works-item-inner">
+                            <h4>UI Design</h4>
+                            <h5>Branding</h5>
+                        </div>
+                    </div>
+                    <!-- /END WORKS ITEM -->
+                    <!-- WORKS ITEM -->
+                    <div class="works-item branding graphics" data-src="/img/works/05_full.jpg">
+                        <img src="/img/works/05_thumb.jpg" data-no-retina alt="" />
+                        <div class="works-item-inner">
+                            <h4>UX Design</h4>
+                            <h5>Branding</h5>
+                        </div>
+                    </div>
+                    <!-- /END WORKS ITEM -->
+                    <!-- WORKS ITEM -->
+                    <div class="works-item web branding" data-iframe="true" id="open-website" data-src="http://www.w3schools.com/">
+                        <img src="/img/works/06_thumb.jpg" data-no-retina alt="" />
+                        <div class="works-item-inner">
+                            <h4>Web Design</h4>
+                            <h5>Branding</h5>
+                        </div>
+                    </div>
+                    <!-- /END WORKS ITEM -->
+                </div>
+            </div>
+            <!-- /END PORTFOLIO -->
+            <!-- SERVICES -->
+            @*<div id="services" class="section-block">
+            <h3 class="title">Services</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+            <div class="row p-t-30 text-xs-center text-sm-left">
+                <div class="icon-box col-md-6">
+                    <div class="icon-box-icon">
+                        <i class="pe pe-paint-bucket"></i>
+                    </div>
+                    <div class="icon-box-content">
+                        <h4>Web Design</h4>
+                        <p>Ei constituam theophrastus per, sea dolorum disputationi in, vel menandri suavitate similique in. Vide assum conceptam eum.</p>
+                    </div>
+                </div>
+                <div class="icon-box col-md-6">
+                    <div class="icon-box-icon">
+                        <i class="pe pe-id"></i>
+                    </div>
+                    <div class="icon-box-content">
+                        <h4>Branding</h4>
+                        <p>Ei constituam theophrastus per, sea dolorum disputationi in, vel menandri suavitate similique in. Vide assum conceptam eum.</p>
+                    </div>
+                </div>
+                <div class="icon-box col-md-6">
+                    <div class="icon-box-icon">
+                        <i class="pe pe-like3"></i>
+                    </div>
+                    <div class="icon-box-content">
+                        <h4>Illustrations</h4>
+                        <p>Ei constituam theophrastus per, sea dolorum disputationi in, vel menandri suavitate similique in. Vide assum conceptam eum.</p>
+                    </div>
+                </div>
+                <div class="icon-box col-md-6">
+                    <div class="icon-box-icon">
+                        <i class="pe pe-phone"></i>
+                    </div>
+                    <div class="icon-box-content">
+                        <h4>Mobile App</h4>
+                        <p>Ei constituam theophrastus per, sea dolorum disputationi in, vel menandri suavitate similique in. Vide assum conceptam eum.</p>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+            <!-- /END SERVICES -->
+            <!-- CONTACT -->
+            <div id="contact" class="section-block p-b-100">
+                <h3 class="title">Get in Touch</h3>
+                <!-- CONTACT FORM -->
+                <form class="contact-form row">
+                    <p class="send-status success"><i class="icon pe-check"></i>Your message has been sent successfully.</p>
+                    <p class="send-status error"><i class="icon pe-close-circle"></i>E-mail must be valid and message must be longer than 1 character.</p>
+                    <div class="form-group col-sm-6">
+                        <input type="text" class="form-control" name="Name" id="name" placeholder="name" />
+                        <label for="name">Name</label>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <input type="email" class="form-control" name="Email" id="email" placeholder="email" />
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="form-group col-xs-12">
+                        <textarea class="form-control" id="message" name="Message" rows="6" placeholder="message"></textarea>
+                        <label for="message">Message</label>
+                    </div>
+                    <div class="col-xs-12">
+                        <button class="btn btn-glossy inverse m-t-40" type="submit" id="submit" name="submit"><span>Send Message</span></button>
+                    </div>
+                </form>
+                <!-- CONTACT INFO -->
+                <div class="row">
+                    <div class="contact-info">
+                        <div class="col-sm-4 p-b-20">
+                            <span>Adres</span>
+                            <p>@Model.Adres</p>
+                        </div>
+                        <div class="col-sm-4 p-b-20">
+                            <span>E-Posta</span>
+                            <p><a href="" target="_blank">@Model.Email</a></p>
+                        </div>
+                        <div class="col-sm-4 p-b-20">
+                            <span>Telefon</span>
+                            <p><a href="callto:954788315970" target="_blank">@Model.Telefon</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /END CONTACT -->
+        </div>
+    </div>
+    <!-- /END MAIN -->
+    <!-- JAVASCRIPTS -->
+
+    <script src="~/Scripts/vendor/plugins.js"></script>
+    <script src="~/Scripts/main.js"></script>
+</body>
+</html>

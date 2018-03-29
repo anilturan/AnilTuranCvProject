@@ -1,0 +1,50 @@
+﻿@model AnilTuran.Models.Skill
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Skill</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserInformationID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserInformationID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BeceriAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BeceriAdi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BeceriDerecesi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BeceriDerecesi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Aciklama)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Aciklama)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SkillID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
